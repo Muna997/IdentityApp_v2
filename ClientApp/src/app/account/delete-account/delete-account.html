@@ -1,0 +1,33 @@
+<div class="auth-page">
+  <div class="auth-card">
+    <h1>Delete Account</h1>
+    <form [formGroup]="form" (ngSubmit)="delete()">
+      <div class="form-group">
+        <app-form-input
+          type="password"
+          placeholder="enter your current Password"
+          formControlName="currentPassword"
+          label="current Password"
+        >
+        </app-form-input>
+      </div>
+      <div class="form-group">
+        <app-form-input
+          type="text"
+          placeholder="enter your current UserName"
+          formControlName="currentUserName"
+          label="current UserName"
+        >
+        </app-form-input>
+      </div>
+      <div class="form-group confirm-group">
+        <label class="checkbox-label">
+          <input type="checkbox" formControlName="confirmation" />
+          I understand this will permanently delete my account
+        </label>
+      </div>
+
+      <button type="submit" class="btn btn-danger btn-block">delete account</button>
+    </form>
+  </div>
+</div>

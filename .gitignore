@@ -1,0 +1,16 @@
+# .NET build output
+bin/
+obj/
+*.user
+
+# Visual Studio / Rider / VS Code
+.vs/
+.idea/
+
+# Real appsettings files contain secrets (DB password, JWT key, MFA key) — never commit these.
+# Commit appsettings.json.example / appsettings.Development.json.example instead.
+API/appsettings.json
+API/appsettings.Development.json
+
+# macOS
+.DS_Store

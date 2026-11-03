@@ -1,0 +1,61 @@
+<div class="auth-page">
+  <div class="auth-card">
+    <h1>Create Account</h1>
+    <form [formGroup]="form" (ngSubmit)="register()">
+      <div class="form-group">
+        <app-form-input
+          type="text"
+          placeholder="enter your username "
+          formControlName="name"
+          label="Username"
+        >
+        </app-form-input>
+
+        @if (form.get('name')?.touched) {
+          @if (form.get('name')?.hasError('required')) {
+            <div class="error-text">This field is required</div>
+          } @else if (form.get('name')?.hasError('minlength')) {
+            <div class="error-text">Name must be at least 3 characters</div>
+          } @else if (form.get('name')?.hasError('maxlength')) {
+            <div class="error-text">Name must be at most 15 characters</div>
+          } @else if (form.get('name')?.hasError('specialCharNotAllowed')) {
+            <div class="error-text">Name can only contain letters and numbers</div>
+          }
+        }
+      </div>
+
+      <div class="form-group">
+        <app-form-input type="email" placeholder="enter your email " formControlName="email">
+        </app-form-input>
+        @if (form.get('email')?.touched) {
+          @if (form.get('email')?.hasError('required')) {
+            <div class="error-text">This field is required</div>
+          } @else if (form.get('email')?.hasError('email')) {
+            <div class="error-text">Invalid email address</div>
+          }
+        }
+      </div>
+
+      <div class="form-group">
+        <app-form-input
+          type="password"
+          placeholder="enter your password "
+          formControlName="password"
+        >
+        </app-form-input>
+
+        @if (form.get('password')?.touched) {
+          @if (form.get('password')?.hasError('required')) {
+            <div class="error-text">This field is required</div>
+          } @else if (form.get('password')?.hasError('minlength')) {
+            <div class="error-text">Password must be at least 6 characters</div>
+          } @else if (form.get('password')?.hasError('maxlength')) {
+            <div class="error-text">Password must be at most 15 characters</div>
+          }
+        }
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block">Submit</button>
+    </form>
+  </div>
+</div>

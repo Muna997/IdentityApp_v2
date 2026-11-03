@@ -1,0 +1,23 @@
+<label>
+  {{ label }}
+  <div>
+    <input
+      #inputRef
+      [type]="type === 'password' && show ? 'text' : type"
+      [placeholder]="placeholder"
+      [value]="value"
+      [disabled]="disabled"
+      (input)="handleInput(inputRef.value)"
+      (blur)="onTouch(inputRef.value)"
+    />
+    @if (type == 'password') {
+      <button type="button" class="toggle-password" (click)="displayPassword()">
+        @if (show) {
+          <i class="bi bi-eye-slash"></i>
+        } @else {
+          <i class="bi bi-eye"></i>
+        }
+      </button>
+    }
+  </div>
+</label>

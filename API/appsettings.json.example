@@ -1,0 +1,34 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=localhost,1433;Database=IdentityAppV2Db;User Id=sa;Password=CHANGE_ME;TrustServerCertificate=True;"
+  },
+
+  "JWT": {
+    "Key": "CHANGE_ME_GENERATE_A_LONG_RANDOM_SECRET",
+    "ExpiresInDays": 1,
+    "Issuer": "IdentityAppV2",
+    "ClientUrl": "CHANGE_ME"
+  },
+
+  "Email": {
+    "Username": "CHANGE_ME",
+    "Password": "",
+    "Host": "localhost",
+    "Port": "1025",
+    "ApplicationName": "IdentityAppV2",
+    "TokenExpiresInMinutes": 30
+  },
+
+  "MFA": {
+    "Key": "CHANGE_ME_GENERATE_A_LONG_RANDOM_SECRET",
+    "TokenExpiresInMinutes": 15,
+    "Issuer": "identityappv2_mfa"
+  }
+}

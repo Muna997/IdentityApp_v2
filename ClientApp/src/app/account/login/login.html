@@ -1,0 +1,30 @@
+<div class="auth-page">
+  <div class="auth-card">
+    <h1>Login</h1>
+    <form [formGroup]="form" (ngSubmit)="login()">
+      <div class="form-group">
+        <app-form-input
+          type="text"
+          placeholder="enter your username"
+          formControlName="userName"
+          label="Username"
+        >
+        </app-form-input>
+      </div>
+
+      <div class="form-group">
+        <app-form-input
+          type="password"
+          placeholder="enter your password"
+          formControlName="password"
+          label="password"
+        >
+        </app-form-input>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block">Login</button>
+
+      <a (click)="forgot()">forgot username or password</a>
+    </form>
+  </div>
+</div>

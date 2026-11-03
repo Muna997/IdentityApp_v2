@@ -1,0 +1,179 @@
+<div class="admin-page">
+  <h1>Users</h1>
+
+  <div class="filter-bar">
+    <input
+      class="form-control search-input"
+      type="text"
+      placeholder="Search name, username or email..."
+      [(ngModel)]="getUsersParams.searchBy"
+      (ngModelChange)="search()"
+    />
+    <button class="add-user-btn" routerLink="/admin/add">+ Add User</button>
+    <select
+      class="form-control filter-select"
+      [(ngModel)]="getUsersParams.lockUnlock"
+      (ngModelChange)="lockUnlock()"
+    >
+      <option value="">All (Lock status)</option>
+      <option value="lock">Locked</option>
+      <option value="unlock">Unlocked</option>
+    </select>
+
+    <select
+      class="form-control filter-select"
+      [(ngModel)]="getUsersParams.activation"
+      (ngModelChange)="activation()"
+    >
+      <option value="">All (Activation)</option>
+      <option value="active">Active</option>
+      <option value="inactive">Inactive</option>
+    </select>
+
+    <select
+      class="form-control filter-select"
+      [(ngModel)]="getUsersParams.sortBy"
+      (ngModelChange)="sortBy()"
+    >
+      <option value="">Default sort</option>
+      <option value="name_a">Name (A-Z)</option>
+      <option value="name_d">Name (Z-A)</option>
+    </select>
+
+    <div class="role-filters">
+      <span class="role-filters-label">Roles:</span>
+      <label class="checkbox-chip">
+        <input (change)="roleChanged('admin', $event)" type="checkbox" value="admin" />
+        admin
+      </label>
+      <label class="checkbox-chip">
+        <input (change)="roleChanged('user', $event)" type="checkbox" value="user" />
+        user
+      </label>
+      <label class="checkbox-chip">
+        <input (change)="roleChanged('moderator', $event)" type="checkbox" value="moderator" />
+        moderator
+      </label>
+    </div>
+  </div>
+
+  @if (usersResult) {
+    <div class="table-wrapper">
+      <table class="user-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Roles</th>
+            <th>Email Status</th>
+            <th>Account</th>
+            <th>Last Activity</th>
+            <th>Lock/Unlock</th>
+            <th>Activate/Deactivate</th>
+            <th>confirm email</th>
+            <th>forget username or password</th>
+            <th>delete user</th>
+            <th>Edit user</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (result of usersResult.items; track result.userId) {
+            <tr>
+              <td>{{ result.name }}</td>
+              <td>{{ result.userName }}</td>
+              <td>{{ result.email }}</td>
+              <td>{{ result.csvRoles }}</td>
+              <td>
+                <span
+                  class="badge"
+                  [class.badge-success]="result.emailConfirmed"
+                  [class.badge-muted]="!result.emailConfirmed"
+                >
+                  {{ result.emailConfirmed ? 'Confirmed' : 'Unconfirmed' }}
+                </span>
+              </td>
+              <td>
+                <span
+                  class="badge"
+                  [class.badge-danger]="result.isLocked"
+                  [class.badge-success]="!result.isLocked"
+                >
+                  {{ result.isLocked ? 'Locked' : 'Unlocked' }}
+                </span>
+                <span
+                  class="badge"
+                  [class.badge-success]="result.isActive"
+                  [class.badge-muted]="!result.isActive"
+                >
+                  {{ result.isActive ? 'Active' : 'Inactive' }}
+                </span>
+              </td>
+              <td>{{ result.lastActivity ?? 'Never' }}</td>
+              <td>
+                <button
+                  class="action-btn"
+                  [class.action-btn--danger]="!result.isLocked"
+                  [class.action-btn--success]="result.isLocked"
+                  (click)="onLockUnlockUser(result, result.isLocked ? 'unlock' : 'lock')"
+                >
+                  {{ result.isLocked ? 'Unlock' : 'Lock' }}
+                </button>
+              </td>
+              <td>
+                <button
+                  class="action-btn"
+                  [class.action-btn--danger]="result.isActive"
+                  [class.action-btn--success]="!result.isActive"
+                  (click)="onActiveInactiveUser(result, result.isActive ? 'inactive' : 'active')"
+                >
+                  {{ result.isActive ? 'Deactivate' : 'Activate' }}
+                </button>
+              </td>
+              <td>
+                <button
+                  class="action-btn action-btn--secondary"
+                  (click)="onEmailConfirmationLink(result)"
+                >
+                  Confirm email
+                </button>
+              </td>
+              <td>
+                <button
+                  class="action-btn action-btn--secondary"
+                  (click)="onForgotUsernameOrPassword(result)"
+                >
+                  Forgot username / password
+                </button>
+              </td>
+              <td>
+                <button class="action-btn action-btn--delete" (click)="onDeleteUser(result)">
+                  Delete
+                </button>
+              </td>
+              <td>
+                <button class="action-btn" [routerLink]="['/admin/edit', result.userId]">
+                  Edit
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+      <app-pagination
+        [pageNumber]="usersResult.pageNumber"
+        [totalPages]="usersResult.totalPages"
+        (pageChanged)="onPageChanged($event)"
+      ></app-pagination>
+    </div>
+
+    <p class="results-summary">
+      Showing page {{ usersResult.pageNumber }} of {{ usersResult.totalPages }} ({{
+        usersResult.totalItemsCount
+      }}
+      users total)
+    </p>
+  } @else {
+    <p class="loading-text">Loading users...</p>
+  }
+</div>

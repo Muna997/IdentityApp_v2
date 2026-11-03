@@ -1,0 +1,30 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+
+  "JWT": {
+    "Key": "CHANGE_ME_GENERATE_A_LONG_RANDOM_SECRET",
+    "ExpiresInDays": 60,
+    "Issuer": "IdentityAppV2",
+    "ClientUrl": "http://localhost:4200"
+  },
+
+  "Email": {
+    "Username": "CHANGE_ME",
+    "Password": "",
+    "Host": "localhost",
+    "Port": "1026",
+    "ApplicationName": "IdentityAppV2",
+    "TokenExpiresInMinutes": 60
+  },
+
+  "MFA": {
+    "Key": "CHANGE_ME_GENERATE_A_LONG_RANDOM_SECRET",
+    "TokenExpiresInMinutes": 15,
+    "Issuer": "identityappv2_mfa"
+  }
+}

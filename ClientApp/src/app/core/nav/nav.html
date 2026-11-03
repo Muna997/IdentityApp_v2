@@ -1,0 +1,24 @@
+<nav>
+  <a [routerLink]="['/']"> logo</a>
+  @if (accountService.isAdmin()) {
+    <a [routerLink]="['/admin/users']"> show user </a>
+  }
+  @if (accountService.$user()) {
+    <ul>
+      <li class="nav-user">
+        <span>Hi, {{ accountService.$user()?.name }}</span>
+        <ul class="dropdown">
+          <li><a [routerLink]="['/account/edit-profile']">edit email or username</a></li>
+          <li><a [routerLink]="['/account/change-password']">change password</a></li>
+          <li><a [routerLink]="['/account/delete-account']">delete account</a></li>
+        </ul>
+      </li>
+      <li><a (click)="logout()">logout</a></li>
+    </ul>
+  } @else {
+    <ul>
+      <li><a [routerLink]="['/account/register']">register</a></li>
+      <li><a [routerLink]="['/account/login']">login</a></li>
+    </ul>
+  }
+</nav>

@@ -1,0 +1,102 @@
+@if (form) {
+  <div class="auth-page">
+    <div class="auth-card user-form-card">
+      <h1>{{ id ? 'Edit User' : 'Add User' }}</h1>
+      <form [formGroup]="form" (ngSubmit)="addEditUser()">
+        <div class="form-group">
+          <app-form-input
+            type="text"
+            placeholder="enter your username "
+            formControlName="name"
+            label="Username"
+          >
+          </app-form-input>
+
+          @if (form.get('name')?.touched) {
+            @if (form.get('name')?.hasError('required')) {
+              <div class="error-text">This field is required</div>
+            } @else if (form.get('name')?.hasError('minlength')) {
+              <div class="error-text">Name must be at least 3 characters</div>
+            } @else if (form.get('name')?.hasError('maxlength')) {
+              <div class="error-text">Name must be at most 15 characters</div>
+            } @else if (form.get('name')?.hasError('specialCharNotAllowed')) {
+              <div class="error-text">Name can only contain letters and numbers</div>
+            } @else if (form.get('name')?.hasError('nameTaken')) {
+              <div class="error-text">This name is already taken</div>
+            }
+          }
+        </div>
+
+        <div class="form-group">
+          <app-form-input type="email" placeholder="enter your email " formControlName="email">
+          </app-form-input>
+          @if (form.get('email')?.touched) {
+            @if (form.get('email')?.hasError('required')) {
+              <div class="error-text">This field is required</div>
+            } @else if (form.get('email')?.hasError('email')) {
+              <div class="error-text">Invalid email address</div>
+            } @else if (form.get('email')?.hasError('emailTaken')) {
+              <div class="error-text">This email is already taken</div>
+            }
+          }
+        </div>
+
+        <div class="form-group">
+          <app-form-input
+            type="password"
+            placeholder="enter your password "
+            formControlName="password"
+          >
+          </app-form-input>
+
+          @if (form.get('password')?.touched) {
+            @if (form.get('password')?.hasError('required')) {
+              <div class="error-text">This field is required</div>
+            } @else if (form.get('password')?.hasError('minlength')) {
+              <div class="error-text">Password must be at least 6 characters</div>
+            } @else if (form.get('password')?.hasError('maxlength')) {
+              <div class="error-text">Password must be at most 16 characters</div>
+            }
+          }
+        </div>
+
+        <div class="form-group">
+          <div class="status-checks">
+            <label class="checkbox-chip">
+              <input type="checkbox" formControlName="emailConfirmed" />
+              Email Confirmed
+            </label>
+
+            <label class="checkbox-chip">
+              <input type="checkbox" formControlName="isActive" />
+              Active
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="section-label">Roles</span>
+          <div class="role-checks">
+            @for (role of roles; track role) {
+              <label class="checkbox-chip">
+                <input
+                  type="checkbox"
+                  [checked]="form.get('roles')?.value.includes(role)"
+                  (change)="onRoleChange(role, $event)"
+                />
+                {{ role }}
+              </label>
+            }
+          </div>
+          @if (form.get('roles')?.touched && form.get('roles')?.hasError('required')) {
+            <div class="error-text">Select at least one role</div>
+          }
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+      </form>
+    </div>
+  </div>
+} @else {
+  <div class="loading-text">loading</div>
+}

@@ -1,0 +1,25 @@
+<div class="auth-page">
+  <div class="auth-card">
+    <h1>Confirm Your Email</h1>
+    <form [formGroup]="form" (ngSubmit)="confirmEmail()">
+      <div class="form-group">
+        <app-form-input type="email" formControlName="email" label="Email" readonly>
+        </app-form-input>
+      </div>
+
+      <div class="form-group">
+        <label>
+          Confirmation Code
+          <input
+            class="form-control"
+            type="text"
+            placeholder="enter the code from your email"
+            formControlName="token"
+          />
+        </label>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block">Confirm Email</button>
+    </form>
+  </div>
+</div>
