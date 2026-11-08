@@ -19,3 +19,4 @@ jobs:
           node-version: 20
       - run: npm ci --legacy-peer-deps
       - run: npx ng test --watch=false --browsers=ChromeHeadless
+      - run: npm run build
