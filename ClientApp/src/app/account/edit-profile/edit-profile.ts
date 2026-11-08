@@ -6,7 +6,6 @@ import { AccountService } from '../account.service';
 import { MyProfileModel } from '../../shared/models/MyProfileModel';
 import { CommonModule } from '@angular/common';
 import { FormInput } from '../../shared/components/form-input/form-input';
-
 @Component({
   selector: 'app-edit-profile',
   imports: [ReactiveFormsModule, CommonModule, FormInput],

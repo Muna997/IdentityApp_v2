@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormInput } from '../../shared/components/form-input/form-input';
-import { Router } from '@angular/router';
 import { SharedService } from '../../shared/shared.service';
 import { AccountService } from '../account.service';
 
@@ -17,7 +16,6 @@ export class ChangePassword implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private accountService: AccountService,
-    private router: Router,
     private sharedService: SharedService,
   ) {}
   ngOnInit(): void {

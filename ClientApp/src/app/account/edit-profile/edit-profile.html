@@ -1,36 +1,40 @@
-<div class="auth-page">
-  <div class="auth-card">
-    <h1>Edit Profile</h1>
-    <form [formGroup]="form" (ngSubmit)="save()">
-      <div class="form-group">
-        <app-form-input
-          type="text"
-          placeholder="enter your username"
-          formControlName="name"
-          label="name"
-        >
-        </app-form-input>
-      </div>
-      <div class="form-group">
-        <app-form-input
-          type="text"
-          placeholder="enter your email"
-          formControlName="email"
-          label="email"
-        >
-        </app-form-input>
-      </div>
-      <div class="form-group">
-        <app-form-input
-          type="password"
-          placeholder="enter your current Password"
-          formControlName="currentPassword"
-          label="current Password"
-        >
-        </app-form-input>
-      </div>
+@if (form) {
+  <div class="auth-page">
+    <div class="auth-card">
+      <h1>Edit Profile</h1>
+      <form [formGroup]="form" (ngSubmit)="save()">
+        <div class="form-group">
+          <app-form-input
+            type="text"
+            placeholder="enter your username"
+            formControlName="name"
+            label="name"
+          >
+          </app-form-input>
+        </div>
+        <div class="form-group">
+          <app-form-input
+            type="text"
+            placeholder="enter your email"
+            formControlName="email"
+            label="email"
+          >
+          </app-form-input>
+        </div>
+        <div class="form-group">
+          <app-form-input
+            type="password"
+            placeholder="enter your current Password"
+            formControlName="currentPassword"
+            label="current Password"
+          >
+          </app-form-input>
+        </div>
 
-      <button type="submit" class="btn btn-primary btn-block">save</button>
-    </form>
+        <button type="submit" class="btn btn-primary btn-block">save</button>
+      </form>
+    </div>
   </div>
-</div>
+} @else {
+  <div class="loading-text">loading</div>
+}
